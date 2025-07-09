@@ -1,6 +1,5 @@
 package programmerzamannow.webmvc.controller;
 
-
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,23 +8,23 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class DateConrtollerTest {
+public class OrderControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    void date() throws Exception {
+    void orderProduct() throws Exception{
         mockMvc.perform(
-                get("/date").queryParam("date", "2020-10-10")
+                get("/orders/1/products/2")
         ).andExpectAll(
                 status().isOk(),
-                content().string(Matchers.containsString("Date: 20201010"))
-                );
+                content().string(Matchers.containsString("Order: 1, Product: 2"))
+        );
     }
 }
